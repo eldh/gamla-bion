@@ -108,7 +108,7 @@ Prior to your first deployment, you'll need to do a few things:
   fly volumes create data --size 1 --app gamla-bion-staging
   ```
 
-Now that everything is set up you can commit and push your changes to your repo. Every commit to your `main` branch will trigger a deployment to your production environment, and every commit to your `dev` branch will trigger a deployment to your staging environment.
+Now that everything is set up you can commit and push your changes to your repo. Every commit to your `master` branch will trigger a deployment to your production environment, and every commit to your `dev` branch will trigger a deployment to your staging environment.
 
 ### Connecting to your database
 
@@ -120,7 +120,7 @@ If you run into any issues deploying to Fly, make sure you've followed all of th
 
 ## GitHub Actions
 
-We use GitHub Actions for continuous integration and deployment. Anything that gets into the `main` branch will be deployed to production after running tests/build/etc. Anything in the `dev` branch will be deployed to staging.
+We use GitHub Actions for continuous integration and deployment. Anything that gets into the `master` branch will be deployed to production after running tests/build/etc. Anything in the `dev` branch will be deployed to staging.
 
 ## Testing
 
