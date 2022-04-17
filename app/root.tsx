@@ -11,6 +11,7 @@ import {
 import { json } from "@remix-run/server-runtime";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import customStylesheetUrl from "./styles/extra.css";
+import faviconUrl from "~/assets/favicon.png";
 import { graphcms } from "./utils/cms";
 import { Nav } from "./components/nav";
 import { gql } from "graphql-request";
@@ -51,6 +52,7 @@ export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: tailwindStylesheetUrl },
     { rel: "stylesheet", href: customStylesheetUrl },
+    { rel: "icon", href: faviconUrl },
   ];
 };
 

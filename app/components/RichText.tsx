@@ -62,7 +62,10 @@ function Asset({ asset }: any) {
 function Event({ event }: any) {
   return (
     <div className="mb-8">
-      <Link to={`/event/${event.slug}`}>
+      <Link
+        to={`/event/${event.slug}`}
+        className="mb-0 flex capitalize hover:text-slate-600 hover:dark:text-white"
+      >
         <h2 className="mb-1 leading-none">{event.title}</h2>
       </Link>
       <span className="mb-0 flex capitalize text-slate-400 dark:text-slate-500">

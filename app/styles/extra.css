@@ -34,3 +34,52 @@ article h3 {
   font-size: 1.676767rem;
   font-weight: 700;
 }
+
+.hamburger {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+.hamburger:before,
+.hamburger:after {
+  content: "";
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  left: 0;
+  position: absolute;
+  transition: all 0.3s ease;
+  transform: rotate(0) translateX(0) translateY(0);
+  transform-origin: 50% 50%;
+  z-index: 100;
+}
+
+.hamburger:before {
+  top: 10px;
+}
+
+.hamburger:after {
+  top: 26px;
+}
+
+.hamburger__open:before {
+  transform: translateY(8px) translateX(0px) rotate(-135deg);
+}
+.hamburger__open:after {
+  transform: translateY(-8px) translateX(0px) rotate(-225deg);
+}
+
+.top-menu {
+  position: fixed;
+  top: 82px;
+  left: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.2s ease;
+  transform: translateY(-8px);
+}
+.top-menu__open {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0px);
+}
