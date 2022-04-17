@@ -5,7 +5,7 @@ import { RichText } from "~/components/RichText";
 import { graphcms } from "~/utils/cms";
 
 const ArticleQuery = gql`
-  query FrontPageArticleQuery($slug: String!) {
+  query ArticleQuery($slug: String!) {
     article(where: { slug: $slug }) {
       title
       slug
@@ -16,9 +16,7 @@ const ArticleQuery = gql`
             title
             description
             date
-            image {
-              url
-            }
+            slug
           }
         }
         html
