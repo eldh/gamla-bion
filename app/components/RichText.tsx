@@ -1,6 +1,7 @@
 import { Link } from "@remix-run/react";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import useIsomorphicLayoutEffect from "use-isomorphic-layout-effect";
 import { FormattedDate } from "./FormattedDate";
 
 export function RichText({ body, className }: any) {
@@ -34,7 +35,7 @@ export function RichText({ body, className }: any) {
 
 function Embed({ contentRef, children, id }: any) {
   const [, setCount] = React.useState(0);
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     setCount((c) => ++c);
   }, [contentRef, children, id]);
   const wrapper = contentRef.current?.querySelector(

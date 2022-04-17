@@ -5,7 +5,7 @@ export function Nav({ navigation }: any) {
   return (
     <>
       <div className="mb-4 shrink-0 opacity-0" style={{ height: "83px" }} />
-      <div className="row fixed left-0 top-0 flex w-full bg-slate-50 bg-opacity-50 py-4 backdrop-blur-md dark:border-b  dark:border-b-slate-800 dark:bg-slate-900 dark:bg-opacity-60">
+      <div className="row fixed left-0 top-0 z-10 flex w-full bg-slate-50 bg-opacity-50 py-4 backdrop-blur-md  dark:border-b dark:border-b-slate-800 dark:bg-slate-900 dark:bg-opacity-60">
         <nav
           className="m-auto flex w-full max-w-xl items-center gap-6 px-6 sm:px-0 md:max-w-2xl "
           style={{ gap: 24 }}
