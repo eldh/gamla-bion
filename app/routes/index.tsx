@@ -36,11 +36,11 @@ export default function Index() {
         alt={data.general.title}
         style={{
           objectFit: "cover",
-          maxHeight: "calc(100vh - 16rem)",
+          maxHeight: "calc(100vh - 17rem)",
         }}
       />
-      <article className="m-auto mt-12 max-w-xl px-6 sm:px-0 md:max-w-2xl">
-        <h1 className={"mb-4 justify-center text-center"}>
+      <article className="m-auto mt-14 max-w-xl px-6 sm:px-0 md:max-w-2xl">
+        <h1 className={"mb-4 mt-0 justify-center text-center"}>
           {data.general.title}
         </h1>
         <span className="flex justify-center  text-slate-500">

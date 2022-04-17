@@ -10,17 +10,25 @@ export function RichText({ body, className }: any) {
         ref={contentRef}
         dangerouslySetInnerHTML={{ __html: body.html }}
       />
-      {body.references?.map((film: any) => {
-        const date = new Date(film.date);
+      {body.references?.map((event: any) => {
+        const date = new Date(event.date);
         return (
-          <Embed key={film.id} contentRef={contentRef} id={film.id}>
-            <div>{film.title}</div>
-            {film.image && <img src={film.image.url} alt={film.title} />}
-            <div>
+          <Embed key={event.id} contentRef={contentRef} id={event.id}>
+            <h2>{event.title}</h2>
+            <span className="mb-4 flex text-slate-400">
               {date.toLocaleDateString("sv-SE")}{" "}
               {date.toLocaleTimeString("sv-SE", { timeStyle: "short" })}
-            </div>
-            <div>{film.description}</div>
+            </span>
+            {/* {event.image && (
+              <img
+                className="mb-8 "
+                src={event.image.url}
+                alt={event.title}
+                height={event.image.height}
+                width={event.image.width}
+              />
+            )} */}
+            <p>{event.description}</p>
           </Embed>
         );
       })}

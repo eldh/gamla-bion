@@ -11,7 +11,7 @@ const ArticleQuery = gql`
       slug
       body {
         references {
-          ... on Film {
+          ... on Event {
             id
             title
             description
