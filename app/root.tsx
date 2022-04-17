@@ -1,9 +1,4 @@
-import type {
-  LinksFunction,
-  LoaderFunction,
-  MetaFunction,
-} from "@remix-run/node";
-import { json } from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -11,44 +6,89 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
-
+import { json } from "@remix-run/server-runtime";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
-import { getUser } from "./session.server";
+import customStylesheetUrl from "./styles/extra.css";
+import { graphcms } from "./utils/cms";
+import { Nav } from "./components/nav";
+import { gql } from "graphql-request";
+import { Footer } from "./components/footer";
+
+const RootInfoQuery = gql`
+  query RootInfoQuery {
+    topNav: navigation(where: { identifier: "top-nav" }) {
+      id
+      articles {
+        title
+        slug
+      }
+    }
+    footerNav: navigation(where: { identifier: "footer-nav" }) {
+      id
+      articles {
+        title
+        slug
+      }
+    }
+    general(where: { identifier: "main" }) {
+      title
+      subtitle
+      headerImage {
+        id
+        url
+      }
+    }
+  }
+`;
+
+export let loader = async () => {
+  return json(await graphcms.request(RootInfoQuery));
+};
 
 export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
+  return [
+    { rel: "stylesheet", href: tailwindStylesheetUrl },
+    { rel: "stylesheet", href: customStylesheetUrl },
+  ];
 };
 
-export const meta: MetaFunction = () => ({
-  charset: "utf-8",
-  title: "Remix Notes",
-  viewport: "width=device-width,initial-scale=1",
-});
-
-type LoaderData = {
-  user: Awaited<ReturnType<typeof getUser>>;
-};
-
-export const loader: LoaderFunction = async ({ request }) => {
-  return json<LoaderData>({
-    user: await getUser(request),
-  });
+export const meta: MetaFunction = ({ data }) => {
+  return {
+    charset: "utf-8",
+    title: data.general.title,
+    viewport: "width=device-width,initial-scale=1",
+  };
 };
 
 export default function App() {
   return (
-    <html lang="en" className="h-full">
+    <html
+      lang="en"
+      className="bg-gray-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50"
+    >
       <head>
         <Meta />
         <Links />
       </head>
       <body className="h-full">
-        <Outlet />
+        <PageWrapper />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
       </body>
     </html>
+  );
+}
+
+function PageWrapper() {
+  let data = useLoaderData();
+  return (
+    <main className="justify-stretch relative flex h-full min-h-screen flex-col content-between items-stretch ">
+      <Nav navigation={data.topNav} />
+      <Outlet />
+      <Footer navigation={data.footerNav} />
+    </main>
   );
 }
