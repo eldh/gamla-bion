@@ -5,8 +5,8 @@ import { FormattedDate } from "~/components/FormattedDate";
 import { graphcms } from "~/utils/cms";
 
 const EventQuery = gql`
-  query EventQuery($slug: String!) {
-    event(where: { slug: $slug }) {
+  query EventQuery($event: String!) {
+    event(where: { slug: $event }) {
       id
       title
       description
@@ -22,7 +22,7 @@ const EventQuery = gql`
 `;
 
 export let loader = async ({ params }: any) => {
-  return json(await graphcms.request(EventQuery, { slug: params.slug }));
+  return json(await graphcms.request(EventQuery, { event: params.event }));
 };
 
 export default function EventRoute() {
