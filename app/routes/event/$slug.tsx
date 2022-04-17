@@ -1,6 +1,7 @@
 import { useLoaderData } from "@remix-run/react";
 import { json } from "@remix-run/server-runtime";
 import { gql } from "graphql-request";
+import { FormattedDate } from "~/components/FormattedDate";
 import { graphcms } from "~/utils/cms";
 
 const EventQuery = gql`
@@ -26,17 +27,15 @@ export let loader = async ({ params }: any) => {
 
 export default function EventRoute() {
   let { event } = useLoaderData();
-  const date = new Date(event.date);
   return (
     <article className="mx-auto mb-auto w-full max-w-xl px-6 sm:px-0 md:max-w-2xl">
-      <h1 className="mb-2">{event.title}</h1>
-      <span className="mb-4 flex text-slate-400">
-        {date.toLocaleDateString("sv-SE")}{" "}
-        {date.toLocaleTimeString("sv-SE", { timeStyle: "short" })}
-      </span>{" "}
+      <h2 className="mb-1 leading-none">{event.title}</h2>
+      <span className="flex capitalize text-slate-400 dark:text-slate-500">
+        <FormattedDate date={event.date} />
+      </span>
       {event.image && (
         <img
-          className="mb-8 "
+          className="mb-8 mt-2"
           src={event.image.url}
           alt={event.title}
           height={event.image.height}

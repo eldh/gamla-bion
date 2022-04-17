@@ -32,7 +32,7 @@ const RootInfoQuery = gql`
         slug
       }
     }
-    general(where: { identifier: "main" }) {
+    siteInfo(where: { identifier: "main" }) {
       title
       subtitle
       headerImage {
@@ -57,7 +57,7 @@ export const links: LinksFunction = () => {
 export const meta: MetaFunction = ({ data }) => {
   return {
     charset: "utf-8",
-    title: data.general.title,
+    title: data.siteInfo.title,
     viewport: "width=device-width,initial-scale=1",
   };
 };
