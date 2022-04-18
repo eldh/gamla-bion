@@ -56,11 +56,19 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const meta: MetaFunction = ({ data }) => {
+export const meta: MetaFunction = ({ data, location }) => {
   return {
     charset: "utf-8",
     title: data.siteInfo.title,
+    "og:title": data.siteInfo.title,
     viewport: "width=device-width,initial-scale=1",
+    "og:url": `https://www.gamlabion.se${location.pathname}`,
+    "og:image": data.siteInfo.headerImage.url,
+    "og:image:width": data.siteInfo.headerImage.width,
+    "og:image:height": data.siteInfo.headerImage.height,
+    "og:locale": "sv_SE",
+    "og:site_name": "Gamla Bion",
+    "og:type": "article",
   };
 };
 

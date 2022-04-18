@@ -1,4 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
+import type { MetaFunction } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 import { gql } from "graphql-request";
 import { RichText } from "~/components/RichText";
@@ -15,11 +16,19 @@ const FrontPageArticleQuery = gql`
       }
       frontPageText {
         html
+        text
       }
     }
   }
 `;
-
+export const meta: MetaFunction = ({ data }) => ({
+  "og:title": `${data.siteInfo.title}`,
+  "og:description": `${data.siteInfo.frontPageText.text.substr(0, 500).replace(
+    /\\n/g,
+    `
+    `
+  )}…`,
+});
 export let loader = async () => {
   return json(await graphcms.request(FrontPageArticleQuery));
 };
