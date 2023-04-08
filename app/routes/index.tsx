@@ -38,13 +38,12 @@ export default function Index() {
   return (
     <>
       <img
-        className="-mt-4 w-screen"
+        className="-mt-4 w-screen object-contain"
         width={data.siteInfo.headerImage.width}
         height={data.siteInfo.headerImage.height}
         src={data.siteInfo.headerImage.url}
         alt={data.siteInfo.title}
         style={{
-          objectFit: "cover",
           maxHeight: "calc(100vh - 17rem)",
         }}
       />

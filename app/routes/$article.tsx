@@ -55,10 +55,6 @@ export const meta: MetaFunction = ({ data, location }) => ({
   "og:type": "article",
 });
 
-/* 
-<meta property="og:description"        content="How much does culture influence creative thinking?" />
-<meta property="og:image"              content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" /> */
-
 export let loader = async ({ params }: any) => {
   return json(
     await graphcms.request(ArticleQuery, { article: params.article })
