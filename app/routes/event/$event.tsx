@@ -33,7 +33,7 @@ export default function EventRoute() {
       <span className="flex capitalize text-slate-400 dark:text-slate-500">
         <FormattedDate date={event.date} />
       </span>
-      {event.image && (
+      {event.image ? (
         <img
           className="mb-8 mt-2"
           src={event.image.url}
@@ -41,7 +41,7 @@ export default function EventRoute() {
           height={event.image.height}
           width={event.image.width}
         />
-      )}
+      ) : null}
       <p>{event.description}</p>
     </article>
   );

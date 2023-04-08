@@ -20,6 +20,11 @@ const ArticleQuery = gql`
             description
             date
             slug
+            image {
+              url
+              height
+              width
+            }
           }
           ... on Carousel {
             __typename

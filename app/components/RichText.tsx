@@ -14,11 +14,11 @@ export function RichText({ body, className }: any) {
         ref={contentRef}
         dangerouslySetInnerHTML={{ __html: body.html }}
       />
-      {body.references?.map((reference: any) => {
+      {body.references?.map((reference: any, index: number) => {
         return (
           <Embed key={reference.id} contentRef={contentRef} id={reference.id}>
             {reference.__typename === "Event" ? (
-              <Event event={reference} />
+              <Event event={reference} big={index === 0} />
             ) : reference.__typename === "Carousel" ? (
               <Carousel carousel={reference} />
             ) : reference.__typename === "Asset" ? (
@@ -59,7 +59,7 @@ function Asset({ asset }: any) {
   );
 }
 
-function Event({ event }: any) {
+function Event({ event, big }: { event: any; big?: boolean }) {
   return (
     <div className="mb-8">
       <Link
@@ -71,7 +71,16 @@ function Event({ event }: any) {
       <span className="mb-0 flex capitalize text-slate-400 dark:text-slate-500">
         <FormattedDate date={event.date} />
       </span>
-      <p>{event.description}</p>
+      {big && event.image ? (
+        <img
+          className="mb-8 mt-2"
+          src={event.image.url}
+          alt={event.title}
+          height={event.image.height}
+          width={event.image.width}
+        />
+      ) : null}
+      <p className={big ? "" : "line-clamp-3"}>{event.description}</p>
     </div>
   );
 }
