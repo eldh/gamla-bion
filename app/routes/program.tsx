@@ -5,6 +5,7 @@ import { gql } from "graphql-request";
 import { Link } from "@remix-run/react";
 import { FormattedDate } from "../components/FormattedDate";
 import { graphcms } from "~/utils/cms";
+import { Event } from "~/components/Event";
 
 const ProgramQuery = gql`
   query Events($now: DateTime!, $startOfYear: DateTime!) {
@@ -37,7 +38,10 @@ const ProgramQuery = gql`
     }
   }
 `;
-export const meta: MetaFunction = ({ data }) => ({});
+export const meta: MetaFunction = () => ({
+  "og:title": `Program`,
+  "og:description": `Program för Gamla Bion ${new Date().getFullYear()}`,
+});
 export let loader = async () => {
   return json(
     await graphcms.request(ProgramQuery, {
@@ -64,31 +68,5 @@ export default function Program() {
         ))}
       </div>
     </article>
-  );
-}
-
-function Event({ event, big }: { event: any; big?: boolean }) {
-  return (
-    <div className="mb-8">
-      <Link
-        to={`/event/${event.slug}`}
-        className="mb-0 flex capitalize hover:text-slate-600 hover:dark:text-white"
-      >
-        <h2 className="mb-1 leading-none">{event.title}</h2>
-      </Link>
-      <span className="mb-0 flex capitalize text-slate-400 dark:text-slate-500">
-        <FormattedDate date={event.date} />
-      </span>
-      {big && event.image ? (
-        <img
-          className="mb-8 mt-2"
-          src={event.image.url}
-          alt={event.title}
-          height={event.image.height}
-          width={event.image.width}
-        />
-      ) : null}
-      <p className={big ? "" : "line-clamp-3"}>{event.description}</p>
-    </div>
   );
 }

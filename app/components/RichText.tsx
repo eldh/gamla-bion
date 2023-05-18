@@ -1,8 +1,7 @@
-import { Link } from "@remix-run/react";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import useIsomorphicLayoutEffect from "use-isomorphic-layout-effect";
-import { FormattedDate } from "./FormattedDate";
+import { Event } from "./Event";
 
 export function RichText({ body, className }: any) {
   let contentRef = React.useRef<HTMLDivElement>(null);
@@ -56,32 +55,6 @@ function Asset({ asset }: any) {
       width={asset.width}
       height={asset.height}
     />
-  );
-}
-
-function Event({ event, big }: { event: any; big?: boolean }) {
-  return (
-    <div className="mb-8">
-      <Link
-        to={`/event/${event.slug}`}
-        className="mb-0 flex capitalize hover:text-slate-600 hover:dark:text-white"
-      >
-        <h2 className="mb-1 leading-none">{event.title}</h2>
-      </Link>
-      <span className="mb-0 flex capitalize text-slate-400 dark:text-slate-500">
-        <FormattedDate date={event.date} />
-      </span>
-      {big && event.image ? (
-        <img
-          className="mb-8 mt-2"
-          src={event.image.url}
-          alt={event.title}
-          height={event.image.height}
-          width={event.image.width}
-        />
-      ) : null}
-      <p className={big ? "" : "line-clamp-3"}>{event.description}</p>
-    </div>
   );
 }
 
