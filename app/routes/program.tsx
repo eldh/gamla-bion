@@ -2,8 +2,6 @@ import { useLoaderData } from "@remix-run/react";
 import type { MetaFunction } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
 import { gql } from "graphql-request";
-import { Link } from "@remix-run/react";
-import { FormattedDate } from "../components/FormattedDate";
 import { graphcms } from "~/utils/cms";
 import { Event } from "~/components/Event";
 

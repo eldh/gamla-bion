@@ -27,6 +27,7 @@ export let loader = async ({ params }: any) => {
 
 export default function EventRoute() {
   let { event } = useLoaderData();
+
   return (
     <article className="mx-auto mb-auto w-full max-w-xl px-6 sm:px-0 md:max-w-2xl">
       <h2 className="mb-1 leading-none">{event.title}</h2>
@@ -42,7 +43,7 @@ export default function EventRoute() {
           width={event.image.width}
         />
       ) : null}
-      <p>{event.description}</p>
+      <p className="whitespace-pre-wrap">{event.description}</p>
     </article>
   );
 }

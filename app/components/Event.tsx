@@ -22,7 +22,11 @@ export function Event({ event, big }: { event: any; big?: boolean }) {
           width={event.image.width}
         />
       ) : null}
-      <p className={`mb-1 ${big ? "line-clamp-10" : "line-clamp-3"}`}>
+      <p
+        className={`mb-1 whitespace-pre-wrap  ${
+          big ? "line-clamp-10 " : "line-clamp-3"
+        }`}
+      >
         {event.description}
       </p>
       <Link
