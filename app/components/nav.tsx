@@ -18,6 +18,7 @@ function DesktopNav({ navigation }: any) {
   return (
     <nav className="m-auto hidden w-full max-w-2xl items-center gap-6 whitespace-nowrap  sm:flex">
       <HomeLink />
+      <ProgramLink />
       {navigation.articles.map((a: { slug: string; title: string }) => (
         <NavLink
           className={({ isActive }) =>
@@ -88,6 +89,21 @@ function HomeLink({ onClick }: { onClick?: React.MouseEventHandler }) {
           className="text-slate-900 dark:text-slate-50"
         />
       </span>
+    </NavLink>
+  );
+}
+
+function ProgramLink({ onClick }: { onClick?: React.MouseEventHandler }) {
+  return (
+    <NavLink
+      onClick={onClick}
+      className={({ isActive }) =>
+        isActive ? "text-blue-700  dark:text-blue-300" : ""
+      }
+      key="program"
+      to="/program"
+    >
+      Program
     </NavLink>
   );
 }
