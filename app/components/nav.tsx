@@ -1,3 +1,4 @@
+import type { NavLinkProps } from "@remix-run/react";
 import { NavLink } from "@remix-run/react";
 import * as React from "react";
 import { Bio } from "./bio";
@@ -54,6 +55,16 @@ function MobileNav({ navigation }: any) {
           open ? "top-menu__open" : ""
         } w-full bg-white dark:bg-slate-900`}
       >
+        <ProgramLink
+          className={({ isActive }) =>
+            `${
+              isActive ? "text-blue-700  dark:text-blue-300" : ""
+            } bre flex w-full select-none whitespace-nowrap border-b border-slate-200 py-4 px-6 dark:border-slate-800`
+          }
+          onClick={() => {
+            setOpen((o) => !o);
+          }}
+        />
         {navigation.articles.map((a: { slug: string; title: string }) => (
           <NavLink
             onClick={() => setOpen(false)}
@@ -93,12 +104,20 @@ function HomeLink({ onClick }: { onClick?: React.MouseEventHandler }) {
   );
 }
 
-function ProgramLink({ onClick }: { onClick?: React.MouseEventHandler }) {
+function ProgramLink({
+  onClick,
+  className,
+}: {
+  className?: NavLinkProps["className"];
+  onClick?: React.MouseEventHandler;
+}) {
   return (
     <NavLink
       onClick={onClick}
-      className={({ isActive }) =>
-        isActive ? "text-blue-700  dark:text-blue-300" : ""
+      className={
+        className ??
+        (({ isActive }) =>
+          isActive ? "text-blue-700  dark:text-blue-300" : "")
       }
       key="program"
       to="/program"
